@@ -4,25 +4,10 @@ score = 0
 player1_score = 0
 player2_score = 0
 
-
 # reset cumulative score only
 def reset():
     global score
     score = 0
-
-# # full reset - player 1
-# def player_reset():
-#     global score
-#     global player1_score
-#     score = 0
-#     player1_score = 0
-
-# # full reset player 2
-# def player2_reset():
-#     global score
-#     global player2_score
-#     score = 0
-#     player2_score = 0
 
 # function to toss a coin
 def coin_toss():

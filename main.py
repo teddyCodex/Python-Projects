@@ -1,5 +1,3 @@
-## to add - check to see who won.
-
 import random
 
 score = 0
@@ -18,56 +16,65 @@ def coin_toss():
     # toss_coin = 1
     return toss_coin
 
-
 def player2_turn():
     global player2_score
     global target_score
     print('\n*** PLAYER 2 TURN ***\n')
     print(f'player 2 score: {player2_score}')
     if player2_score >= target_score:
-        print('Player 2 has won the game!')
+        print(f'Player 2 has won the game with {player2_score}!')
+        exit()
     else:
         roll = input('Type Roll to roll dice: ').lower()
         if roll == 'roll':
             def dice_roll():
                 global score
                 global player2_score
-                roll_dice = random.randint(1,6)
-                print(f'You rolled {roll_dice}')
-                if roll_dice == 1:
-                    print('Player lost Turn')
-                    reset()
-                    print(f'player 2 score: {player2_score}') # test
-                    player1_turn()
+                global target_score
+                if score + player2_score >= target_score:
+                    print(f'Player 2 has won the game with {player2_score}!')
+                    exit()
                 else:
-                    score += roll_dice
-                    print(f'Your score this round is {score}\n')
-                    def next_turn():
-                        global score
-                        global player1_score
-                        global player2_score
-                        global target_score
-                        if player2_score >= target_score:
-                            print('Player 2 has won the game!')
-                        else:
-                            turn = input('Roll or Hold: ').lower()
-                            if turn == 'roll':
-                                dice_roll()
-                            elif turn == 'hold':
-                                player2_score += score
-                                print(f'Your current held score is: {player2_score}')
-                                print(f'player 2 score: {player2_score}') # test
-                                reset()
-                                print(f'player 2 score: {player2_score}') # test
-                                player1_turn()
+                    roll_dice = random.randint(1,6)
+                    print(f'You rolled {roll_dice}')
+                    if roll_dice == 1:
+                        print('Player lost Turn')
+                        reset()
+                        print(f'player 2 score: {player2_score}') # test
+                        player1_turn()
+                    else:
+                        score += roll_dice
+                        print(f'Your score this round is {score}\n')
+                        def next_turn():
+                            global score
+                            global player1_score
+                            global player2_score
+                            global target_score
+                            if score + player2_score >= target_score:
+                                print(f'Player 2 has won the game with {player2_score}!')
+                                exit()
                             else:
-                                print('Invalid Input!')
-                                next_turn()
-                    next_turn()
+                                turn = input('Roll or Hold: ').lower()
+                                if turn == 'roll':
+                                    dice_roll()
+                                elif turn == 'hold':
+                                    player2_score += score
+                                    print(f'Your current held score is: {player2_score}')
+                                    if player2_score >= target_score:
+                                        print(f'Player 2 has won the game with {player2_score}!')
+                                        exit()
+                                    print(f'player 2 score: {player2_score}') # test
+                                    reset()
+                                    print(f'player 2 score: {player2_score}') # test
+                                    player1_turn()
+                                else:
+                                    print('Invalid Input!')
+                                    next_turn()
+                        next_turn()
         else:
             print('Invalid Input! Try Again.')
             player2_turn()
-    dice_roll()
+        dice_roll()
 
 
 # player turn sequence
@@ -77,48 +84,58 @@ def player1_turn():
     print('\n*** PLAYER 1 TURN ***\n')
     print(f'player 1 score: {player1_score}')
     if player1_score >= target_score:
-        print('Player 1 has won the game!')
+        print(f'Player 1 has won the game with {player1_score}!')
+        exit()
     else:
         roll = input('Type Roll to roll dice: ').lower()
         if roll == 'roll':
             def dice_roll():
                 global score
-                roll_dice = random.randint(1,6)
-                print(f'You rolled {roll_dice}')
-                if roll_dice == 1:
-                    print('Player lost Turn')
-                    reset()
-                    print(f'player 1 score: {player1_score}') # test
-                    player2_turn()
+                global target_score
+                if score + player1_score >= target_score:
+                    print(f'Player 1 has won the game with {player1_score}!')
+                    exit()
                 else:
-                    score += roll_dice
-                    print(f'Your score this round is {score}\n')
-                    def next_turn():
-                        global score
-                        global player1_score
-                        global player2_score
-                        global target_score
-                        if player1_score >= target_score:
-                            print('Player 1 has won the game!')
-                        else:
-                            turn = input('Roll or Hold: ').lower()
-                            if turn == 'roll':
-                                dice_roll()
-                            elif turn == 'hold':
-                                player1_score += score
-                                print(f'Your current held score is: {player1_score}')
-                                print(f'player 1 score: {player1_score}') # test
-                                reset()
-                                print(f'player 1 score: {player1_score}') # test
-                                player2_turn()
+                    roll_dice = random.randint(1,6)
+                    print(f'You rolled {roll_dice}')
+                    if roll_dice == 1:
+                        print('Player lost Turn')
+                        reset()
+                        print(f'player 1 score: {player1_score}') # test
+                        player2_turn()
+                    else:
+                        score += roll_dice
+                        print(f'Your score this round is {score}\n')
+                        def next_turn():
+                            global score
+                            global player1_score
+                            global player2_score
+                            global target_score
+                            if score + player1_score >= target_score:
+                                print(f'Player 1 has won the game with {player1_score}!')
+                                exit()
                             else:
-                                print('Invalid Input!')
-                                next_turn()
-                    next_turn()
+                                turn = input('Roll or Hold: ').lower()
+                                if turn == 'roll':
+                                    dice_roll()
+                                elif turn == 'hold':
+                                    player1_score += score
+                                    print(f'Your current held score is: {player1_score}')
+                                    if player1_score >= target_score:
+                                        print(f'Player 1 has won the game with {player1_score}!')
+                                        exit()
+                                    print(f'player 1 score: {player1_score}') # test
+                                    reset()
+                                    print(f'player 1 score: {player1_score}') # test
+                                    player2_turn()
+                                else:
+                                    print('Invalid Input!')
+                                    next_turn()
+                        next_turn()
         else:
             print('Invalid Input! Try Again.')
             player1_turn()
-    dice_roll()
+        dice_roll()
 
 
 
@@ -142,9 +159,6 @@ def start_game():
     else:
         print('Invalid Input')
         start_game()
-
-
-
 
 # print(start_game())
 start_game()

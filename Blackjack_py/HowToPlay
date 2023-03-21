@@ -1,0 +1,78 @@
+# BLACKJACK
+
+## Objective:
+
+    The objective of the game is to beat the dealer's hand without exceeding a total of 21 points.
+
+## Global Rules
+
+    Cards: The game is played with one or more decks of standard playing cards, without the jokers. Each card is assigned a point value as follows:
+
+    Ace can count as 1 or 11 points
+    Face cards (King, Queen, and Jack) count as 10 points
+    All other cards count as their face value
+
+## Game Play:
+
+    The game begins with the player placing a bet on the table.
+
+    The dealer deals two cards to each player, face up, and two cards to themselves, one face up and one face down.
+
+    The player can then choose to either "hit" and receive another card, or "stand" and keep their current total.
+    The player can continue to hit until they reach a total of 21 or exceed it, which is called "busting" and they lose the game.
+
+    Once all players have finished their turns, the dealer reveals their face-down card.
+    If the dealer has a total of 16 or less, they must hit until they reach a total of 17 or higher.
+    If the dealer busts, all remaining players win. If the dealer does not bust, their total is compared to each player's total, and the player with a higher total wins.
+    If the dealer and a player have the same total, it is a push, and the player's bet is returned.
+
+    If the player's first two cards are a "Blackjack," which is an Ace and a 10-point card, the player wins immediately and is paid out 1.5 times their bet. If the dealer also has a Blackjack, the game is a push.
+
+## Additional rules:
+
+    "Split" can be chosen if a player has two cards of the same value, and the player can split their hand into two separate hands, each with its own bet.
+    The player then plays each hand separately.
+
+    "Double down" allows a player to double their bet and receive one more card.
+    The player must stand after receiving the card.
+
+GAME LOGIC.
+Design game for one player vs Dealer
+
+Define cards.
+
+Player makes bet
+Dealer draws two cards from the deck and presents to player
+Dealer draws two cards for themselves for presents only one
+Player can Hit or Stand.
+If Player hits
+Dealer deals another card to Player
+Dealer checks if Player's cards equal or greater than 21
+if Player cards == A and 10 point card
+Blackjack
+Player wins (1.5 of bet amount)
+ElIf Player cards == 21
+Player Wins (2 times bet)
+ElIf Player cards > 21
+Player bust. Bet Lost.
+Play Again or Exit?
+If Play Again
+Loop from start
+Else If Exit
+Exit()
+Else
+Invalid Input
+Ask Play Again or Exit.
+Else (less than 21)
+Hit or Stand
+If Hit
+Loop Hit
+ElIf Stand
+Loop Stand
+Else
+Invalid Input
+Ask Hit or Stand.
+ElIf Player Stands
+
+    ElIf Double Down
+    ElIf Split **

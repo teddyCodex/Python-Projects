@@ -22,7 +22,7 @@ def player2_turn():
     print('\n*** PLAYER 2 TURN ***\n')
     print(f'player 2 score: {player2_score}')
     if player2_score >= target_score:
-        print(f'Player 2 has won the game with {player2_score}!')
+        print(f'Player 2 has won the game with {player2_score} points!\n')
         exit()
     else:
         roll = input('Type Roll to roll dice: ').lower()
@@ -32,7 +32,8 @@ def player2_turn():
                 global player2_score
                 global target_score
                 if score + player2_score >= target_score:
-                    print(f'Player 2 has won the game with {player2_score}!')
+                    player2_score += score
+                    print(f'Player 2 has won the game with {player2_score} points!\n')
                     exit()
                 else:
                     roll_dice = random.randint(1,6)
@@ -51,7 +52,8 @@ def player2_turn():
                             global player2_score
                             global target_score
                             if score + player2_score >= target_score:
-                                print(f'Player 2 has won the game with {player2_score}!')
+                                player2_score += score
+                                print(f'Player 2 has won the game with {player2_score} points!\n')
                                 exit()
                             else:
                                 turn = input('Roll or Hold: ').lower()
@@ -61,7 +63,7 @@ def player2_turn():
                                     player2_score += score
                                     print(f'Your current held score is: {player2_score}')
                                     if player2_score >= target_score:
-                                        print(f'Player 2 has won the game with {player2_score}!')
+                                        print(f'Player 2 has won the game with {player2_score} points!\n')
                                         exit()
                                     print(f'player 2 score: {player2_score}') # test
                                     reset()
@@ -84,16 +86,18 @@ def player1_turn():
     print('\n*** PLAYER 1 TURN ***\n')
     print(f'player 1 score: {player1_score}')
     if player1_score >= target_score:
-        print(f'Player 1 has won the game with {player1_score}!')
+        print(f'Player 1 has won the game with {player1_score} points!')
         exit()
     else:
         roll = input('Type Roll to roll dice: ').lower()
         if roll == 'roll':
             def dice_roll():
                 global score
+                global player1_score
                 global target_score
                 if score + player1_score >= target_score:
-                    print(f'Player 1 has won the game with {player1_score}!')
+                    player1_score += score
+                    print(f'Player 1 has won the game with {player1_score} points!\n')
                     exit()
                 else:
                     roll_dice = random.randint(1,6)
@@ -112,7 +116,8 @@ def player1_turn():
                             global player2_score
                             global target_score
                             if score + player1_score >= target_score:
-                                print(f'Player 1 has won the game with {player1_score}!')
+                                player1_score += score
+                                print(f'Player 1 has won the game with {player1_score} points!\n')
                                 exit()
                             else:
                                 turn = input('Roll or Hold: ').lower()
@@ -122,7 +127,7 @@ def player1_turn():
                                     player1_score += score
                                     print(f'Your current held score is: {player1_score}')
                                     if player1_score >= target_score:
-                                        print(f'Player 1 has won the game with {player1_score}!')
+                                        print(f'Player 1 has won the game with {player1_score} points!\n')
                                         exit()
                                     print(f'player 1 score: {player1_score}') # test
                                     reset()

@@ -1,69 +1,113 @@
 import random
 
-player_funds = 0
+print(
+    '''
+                                                                                       
+88          88                       88        88                       88         
+88          88                       88        ""                       88         
+88          88                       88                                 88         
+88,dPPYba,  88 ,adPPYYba,  ,adPPYba, 88   ,d8  88 ,adPPYYba,  ,adPPYba, 88   ,d8   
+88P'    "8a 88 ""     `Y8 a8"     "" 88 ,a8"   88 ""     `Y8 a8"     "" 88 ,a8"    
+88       d8 88 ,adPPPPP88 8b         8888[     88 ,adPPPPP88 8b         8888[      
+88b,   ,a8" 88 88,    ,88 "8a,   ,aa 88`"Yba,  88 88,    ,88 "8a,   ,aa 88`"Yba,   
+8Y"Ybbd8"'  88 `"8bbdP"Y8  `"Ybbd8"' 88   `Y8a 88 `"8bbdP"Y8  `"Ybbd8"' 88   `Y8a  
+                                              ,88                                  
+                                            888P"       
+    '''
+)
+
 player_cards = []
 dealer_cards = []
+blackjack = False
+outcomes = {
+    'win': 'You Win!!',
+    'lost': 'You Lost!',
+    'bust': 'Bust! You Lost!',
+    'draw': 'It\'s a draw!',
+    'blackjack': 'Blackjack! You Win!!'
+}
+# dealer_turn = False
 
-#   Functions are defined from this point
-def init():
-    global player_funds, player_cards, dealer_cards
-    player_funds = 0
-    player_cards = []
-    dealer_cards = []
+# function to deal a card
+def deal_card():
+    return random.randrange(1, 12)
 
-def start():
-    global player_funds
-    init()
-    deposit = int(input('\nHow much will you be playing with today?: '))
-    player_funds += deposit
-    bet()
-    # return player_funds
+# function to check player total
+def check_total(list):
+    return sum(list)
 
-def bet():
-    global player_funds
-    if player_funds <= 0:
-        print('Player has no funds!')
-        start()
+# function to display cards
+def display_cards(name):
+    if name == player_cards:
+        display = 'Player\'s Cards: '
     else:
-        while True:
-            try:
-                bet_value = int(input('Enter Bet Amount: '))
-                if bet_value > player_funds:
-                    print('Player has Insufficient Funds')
-                else:
-                    player_funds -= bet_value
-                    return bet_value
-            except ValueError:
-                print('Invalid input. Please enter an integer.')
+        display = 'Dealer\'s Cards: '
+    for i in name:
+        display += f' {str(i)} '
+    print(display)
+    print(f'Total: {check_total(name)}')
+    print('\n')
+
+
+# bet = 50
+# input('Type bet amount: ')
+
+
+while not blackjack:
+    while len(player_cards) < 2:
+        player_cards.append(deal_card())
+    dealer_cards.append(deal_card())
+
+    if check_total(player_cards) > 21:
+        display_cards(player_cards)
+        outcomes['lost']
+        break
+    else:
+        display_cards(player_cards)
+        display_cards(dealer_cards)
+
+    if check_total(player_cards) == 21:
+        print(outcomes['blackjack'])
+        blackjack = True
+        break
     
-def deal():
-    card = random.randint(1, 10)
-    return card
+    
+    while check_total(player_cards) < 21:
+        # hit or stand
+        choice = input('Hit or Stand?: ').lower()
+        if choice == 'hit':
+            player_cards.append(deal_card())
+            if check_total(player_cards) > 21:
+                display_cards(player_cards)
+                display_cards(dealer_cards)
+                print(outcomes['bust'])
+            else:
+                display_cards(player_cards)
+                display_cards(dealer_cards)
+        if choice == 'stand':
+            dealer_cards.append(deal_card())
+            display_cards(player_cards)
+            display_cards(dealer_cards)
+            while check_total(dealer_cards) < 17:
+                dealer_cards.append(deal_card())
+                display_cards
+            # display_cards(player_cards)
+            display_cards(dealer_cards)
 
-def first_round():
-    global player_cards, dealer_cards
-    while True:
-        start = input('Type Start or Exit: ').lower()
-        if start == 'start':
-            for i in range(2):
-                player_cards.append(deal())
-            dealer_cards.append(deal())
-            print(f'Your cards: {player_cards}')
-            print(f'Dealers cards: {dealer_cards}')
-            return player_cards
-            break
-        elif start == 'exit':
-            exit()
-        else:
-            print('Invalid Input')
-#   Functions End Here
+            if check_total(player_cards) < check_total(dealer_cards):
+                print(outcomes['lost'])
+                break
+            elif check_total(player_cards) == check_total(dealer_cards):
+                print(outcomes['draw'])
+                break
+            else:
+                print(outcomes['win'])
+                break
+    if check_total(player_cards) == 21:
+        print(outcomes['win'])
 
 
-#   Function Calls
-start()
-first_round()
-# bet()
-# print(bet())
-print(f'\nTests\nPlayer funds = {player_funds}')
-print(f'Player Cards = {player_cards}')
-# print(deal())
+
+    blackjack = True
+
+# print(player_cards)

@@ -20,11 +20,11 @@ player_cards = []
 dealer_cards = []
 blackjack = False
 outcomes = {
-    'win': 'You Win!!',
-    'lost': 'You Lost!',
-    'bust': 'Bust! You Lost!',
-    'draw': 'It\'s a draw!',
-    'blackjack': 'Blackjack! You Win!!'
+    'win': 'You Win!!\n',
+    'lost': 'You Lost!\n',
+    'bust': 'Bust! You Lost!\n',
+    'draw': 'It\'s a draw!\n',
+    'blackjack': 'Blackjack! You Win!!\n'
 }
 # dealer_turn = False
 
@@ -88,13 +88,13 @@ while not blackjack:
             dealer_cards.append(deal_card())
             display_cards(player_cards)
             display_cards(dealer_cards)
-            while check_total(dealer_cards) < 17:
+            while check_total(dealer_cards) <= 17:
                 dealer_cards.append(deal_card())
-                display_cards
+                # display_cards
             # display_cards(player_cards)
             display_cards(dealer_cards)
 
-            if check_total(player_cards) < check_total(dealer_cards):
+            if check_total(player_cards) < check_total(dealer_cards) and check_total(dealer_cards) <= 21:
                 print(outcomes['lost'])
                 break
             elif check_total(player_cards) == check_total(dealer_cards):

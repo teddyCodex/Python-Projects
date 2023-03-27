@@ -27,7 +27,6 @@ def start_cipher():
                     else:
                         end_text += alphabet[alphabet.index(i) - shift_amount]
 
-
             else:
                 end_text += i
         print(f"The {cipher_direction}d text is {end_text}")

@@ -1,3 +1,3 @@
 # Prime Number Checker
 
-This program checks if a number (num) is a prime number or not.
+This program checks if a number (number) is a prime number or not.

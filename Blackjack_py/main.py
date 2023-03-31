@@ -1,20 +1,7 @@
 import random
+from art import logo
 
-print(
-    '''
-                                                                                       
-88          88                       88        88                       88         
-88          88                       88        ""                       88         
-88          88                       88                                 88         
-88,dPPYba,  88 ,adPPYYba,  ,adPPYba, 88   ,d8  88 ,adPPYYba,  ,adPPYba, 88   ,d8   
-88P'    "8a 88 ""     `Y8 a8"     "" 88 ,a8"   88 ""     `Y8 a8"     "" 88 ,a8"    
-88       d8 88 ,adPPPPP88 8b         8888[     88 ,adPPPPP88 8b         8888[      
-88b,   ,a8" 88 88,    ,88 "8a,   ,aa 88`"Yba,  88 88,    ,88 "8a,   ,aa 88`"Yba,   
-8Y"Ybbd8"'  88 `"8bbdP"Y8  `"Ybbd8"' 88   `Y8a 88 `"8bbdP"Y8  `"Ybbd8"' 88   `Y8a  
-                                              ,88                                  
-                                            888P"       
-    '''
-)
+print(logo)
 
 player_cards = []
 dealer_cards = []
@@ -26,11 +13,10 @@ outcomes = {
     'draw': 'It\'s a draw!\n',
     'blackjack': 'Blackjack! You Win!!\n'
 }
-# dealer_turn = False
 
 # function to deal a card
 def deal_card():
-    return random.randrange(1, 12)
+    return random.choice([11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10])
 
 # function to check player total
 def check_total(list):
@@ -47,10 +33,6 @@ def display_cards(name):
     print(display)
     print(f'Total: {check_total(name)}')
     print('\n')
-
-
-# bet = 50
-# input('Type bet amount: ')
 
 
 while not blackjack:
@@ -109,5 +91,3 @@ while not blackjack:
 
 
     blackjack = True
-
-# print(player_cards)

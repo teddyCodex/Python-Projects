@@ -1,5 +1,7 @@
-from collections import Counter
+dict = {
+    'a' : 20,
+    'b' : 30,
+    'c' : 40
+}
 
-list = [1, 3, 4, 1, 5, 4, 6, 4, 1, 4]
-
-print(Counter(list))
+print(len(dict))

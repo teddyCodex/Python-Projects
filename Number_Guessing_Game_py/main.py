@@ -32,7 +32,7 @@ def turns_equal_one():
         print('Guess Again.')
 
 random_number = random.randint(1, 101)
-print(f"\nThe number is {random_number}\n")
+# print(f"\nThe number is {random_number}\n")
 
 while user_turns > 0:
     if user_turns == 1:
@@ -60,3 +60,4 @@ while user_turns > 0:
 
 if user_turns == 0:
     print('\nYou ran out of turns. Game Over!')
+    print(f'The number was {random_number}\n')

@@ -1,7 +1,7 @@
-import art
+from art import logo
 import random
 
-print(art.logo)
+print(logo)
 print('\nCan you read my mind?\n')
 
 while True:

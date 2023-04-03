@@ -1,18 +1,8 @@
-#Number Guessing Game Objectives:
-
-# Include an ASCII art logo.
-# Allow the player to submit a guess for a number between 1 and 100.
-# Check user's guess against actual answer. Print "Too high." or "Too low." depending on the user's answer. 
-# If they got the answer correct, show the actual answer to the player.
-# Track the number of turns remaining.
-# If they run out of turns, provide feedback to the player. 
-# Include two different difficulty levels (e.g., 10 guesses in easy mode, only 5 guesses in hard mode).
-
 import art
-import secrets
+import random
 
-# print(art.logo)
-print('Can you read my mind?\n')
+print(art.logo)
+print('\nCan you read my mind?\n')
 
 while True:
     difficulty = input("Select Difficulty. 'easy' or 'hard'?: ").lower()
@@ -24,3 +14,49 @@ while True:
         break
     else:
         print('Invalid Input. Try Again.\n')
+
+def reduce_turns(correct_guess):
+    '''
+    Takes a boolean to determine whether to reduce user_turns
+    Returns user_turns less 1.
+    '''
+    if correct_guess == False:
+        return user_turns - 1
+
+def turns_equal_one():
+    '''
+    Checks if user score is not equal to one
+    if true, prints Guess Again to the console
+    '''
+    if user_turns != 1:
+        print('Guess Again.')
+
+random_number = random.randint(1, 101)
+print(f"\nThe number is {random_number}\n")
+
+while user_turns > 0:
+    if user_turns == 1:
+        print(f"You have {user_turns} guess left.")
+    else:
+        print(f"You have {user_turns} guesses left.")
+    try:
+        guess = int(input('\nGuess my number: '))
+        if guess == random_number:
+            print(f'\nYou guessed right!! The number is {random_number}')
+            break
+        elif guess > random_number:
+            print('\nToo High.')
+            if user_turns != 1:
+                print('Guess Again.')
+            user_turns = reduce_turns(False)
+        else:
+            print('\nToo Low.')
+            if user_turns != 1:
+                print('Guess Again.')
+            user_turns = reduce_turns(False)
+    except ValueError:
+        # catch non-integer inputs
+        print("\nOops! That's not a number. Try Again.")
+
+if user_turns == 0:
+    print('\nYou ran out of turns. Game Over!')

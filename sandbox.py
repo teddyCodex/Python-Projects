@@ -5,3 +5,9 @@ dict = {
 }
 
 print(len(dict))
+
+
+
+# Assets
+
+dice_imgs = ["❶", "❷", "❸", "❹", "❺", "❻"]

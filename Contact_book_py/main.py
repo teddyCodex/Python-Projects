@@ -3,28 +3,19 @@ import art
 print(art.logo_name)
 print(art.logo)
 
-# _______________________________________________________
-# # Function to clear the screen
-# def clear():
-#     print("\033[H\033[J")
-#     print(art.logo_name)
-#     print(art.logo)
-
 contact_book = {}
-
-# print(contact_book)
 
 program_active = True
 
-while program_active:
-    # _______________________________________________________
-    # function to print contact details
-    def print_contact_details(name):
-        contact = contact_book[name]
-        print("\nname : {}".format(contact['name']))
-        print("address : {}".format(contact['address']))
-        print("tel : {}".format(contact['tel']))
+# _______________________________________________________
+# function to print contact details
+def print_contact_details(name):
+    contact = contact_book[name]
+    print("\nname : {}".format(contact['name']))
+    print("address : {}".format(contact['address']))
+    print("tel : {}".format(contact['tel']))
 
+while program_active:
     # _______________________________________________________
     # Function to add a contact
     def add_contact():

@@ -1,14 +1,14 @@
 import secrets
 import hangman_art
+import hangman_words
 
-word_list = ['apple', 'banana', 'orange', 'elephant']
+word_list = hangman_words.words
 lives = 6
 
 # Generate a random word by selecting from the word_list 
 chosen_word = secrets.choice(word_list)
 
 print(hangman_art.logo + '\n')
-
 print('Welcome to Hangman!!')
 
 # display to track player progress
@@ -16,7 +16,6 @@ display = []
 for i in chosen_word:
     display.append('_')
 
-print(f'The chosen word is {chosen_word}')
 
 # check if guessed letter is in the chosen_word
 end_of_game = False

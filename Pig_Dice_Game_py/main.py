@@ -36,7 +36,7 @@ def player2_turn():
                     print(f'Player 2 has won the game with {player2_score} points!\n')
                     exit()
                 else:
-                    roll_dice = random.randint(1,6)
+                    roll_dice = random.randint(1, 6)
                     print(f'You rolled {roll_dice}')
                     if roll_dice == 1:
                         print('Player lost Turn')

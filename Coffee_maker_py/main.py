@@ -1,13 +1,13 @@
-from backend import MENU
+from backend import menu
 from backend import resources
 from backend import coins
 
 
 # function to check resources
 def check_resources(coffee_choice):
-    water_needed = MENU[coffee_choice]['ingredients']['water']
-    milk_needed = MENU[coffee_choice]['ingredients']['milk']
-    coffee_needed = MENU[coffee_choice]['ingredients']['coffee']
+    water_needed = menu[coffee_choice]['ingredients']['water']
+    milk_needed = menu[coffee_choice]['ingredients']['milk']
+    coffee_needed = menu[coffee_choice]['ingredients']['coffee']
     if water_needed > resources['water']:
         print("Sorry. Not enough water")
     elif milk_needed > resources['milk']:
@@ -33,7 +33,7 @@ def check_coins(quarters, dimes, nickels, pennies):
 
 
 def amount_needed(coffee_choice):
-    return MENU[coffee_choice]['cost']
+    return menu[coffee_choice]['cost']
 
 
 def collect_coins():
@@ -42,23 +42,29 @@ def collect_coins():
     dimes = input('How many dimes?: ')
     nickels = input('How many nickels?: ')
     pennies = input('How many pennies?: ')
+    if not (quarters.isdigit() and dimes.isdigit() and nickels.isdigit() and pennies.isdigit()):
+        print("Invalid input. Please enter only numbers.")
+        return collect_coins()
     return quarters, dimes, nickels, pennies
 
 
 def coffee_engine():
     make_coffee = check_resources(user_choice)
-    deplete_resources(make_coffee[0], make_coffee[1], make_coffee[2])
-    coins_collected = collect_coins()
-    coins_total = check_coins(int(coins_collected[0]), int(coins_collected[1]), int(coins_collected[2]), int(coins_collected[3]))
-    if amount_needed(user_choice) > coins_total:
-        print("Not enough money. Coins refunded")
+    if make_coffee is None:
+        return
     else:
-        balance = coins_total - amount_needed(user_choice)
-        if 'money' in resources:
-            resources['money'] += amount_needed(user_choice)
+        deplete_resources(make_coffee[0], make_coffee[1], make_coffee[2])
+        coins_collected = collect_coins()
+        coins_total = check_coins(int(coins_collected[0]), int(coins_collected[1]), int(coins_collected[2]), int(coins_collected[3]))
+        if amount_needed(user_choice) > coins_total:
+            print("Not enough money. Coins refunded")
         else:
-            resources['money'] = amount_needed(user_choice)
-        print(f"Here's your Balance: ${balance:.2f}. Enjoy your {user_choice} ☕️")
+            balance = coins_total - amount_needed(user_choice)
+            if 'money' in resources:
+                resources['money'] += amount_needed(user_choice)
+            else:
+                resources['money'] = amount_needed(user_choice)
+            print(f"\nHere's your Balance: ${balance:.2f}. Enjoy your {user_choice} ☕️\n")
 
 
 def generate_report():
@@ -79,7 +85,7 @@ coffee_maker = 'on'
 
 while coffee_maker == 'on':
     # display prices of the available coffee options
-    for item_name, item_info in MENU.items():
+    for item_name, item_info in menu.items():
         print(f"{item_name.capitalize()} at ${item_info['cost']:.2f} ")
 
     # ask user to choose from available options

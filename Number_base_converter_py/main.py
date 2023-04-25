@@ -54,7 +54,7 @@ def rebase(input_base, digits, output_base):
         num_from_base10 = from_base_10(num_to_base10, output_base)
         return num_from_base10
 
-print(rebase(2, [1, 0, 1, 0, 1, 0], 10), 42)
+# print(rebase(2, [1, 0, 1, 0, 1, 0], 10), 42)
 
 # def main():
 #     print(logo)

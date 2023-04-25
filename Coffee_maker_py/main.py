@@ -1,100 +1,65 @@
-from backend import menu
-from backend import resources
-from backend import coins
+"""
+Python list documentation: https://docs.python.org/3/tutorial/datastructures.html
+"""
 
 
-# function to check resources
-def check_resources(coffee_choice):
-    water_needed = menu[coffee_choice]['ingredients']['water']
-    milk_needed = menu[coffee_choice]['ingredients']['milk']
-    coffee_needed = menu[coffee_choice]['ingredients']['coffee']
-    if water_needed > resources['water']:
-        print("Sorry. Not enough water")
-    elif milk_needed > resources['milk']:
-        print("Sorry. Not enough milk")
-    elif coffee_needed > resources['coffee']:
-        print("Sorry. Not enough coffee")
-    else:
-        return water_needed, milk_needed, coffee_needed
+def get_rounds(number):
+    """Create a list containing the current and next two round numbers.
+
+    :param number: int - current round number.
+    :return: list - current round and the two that follow.
+    """
+    rounds = list()
+    rounds.append(number)
+    while len(rounds) != 3:
+        number += 1
+        rounds.append(number)
+    return rounds
 
 
-def deplete_resources(water_needed, milk_needed, coffee_needed):
-    resources['water'] -= water_needed
-    resources['milk'] -= milk_needed
-    resources['coffee'] -= coffee_needed
+def concatenate_rounds(rounds_1, rounds_2):
+    """Concatenate two lists of round numbers.
+
+    :param rounds_1: list - first rounds played.
+    :param rounds_2: list - second set of rounds played.
+    :return: list - all rounds played.
+    """
+
+    rounds = rounds_1 + rounds_2
+    return rounds
 
 
-def check_coins(quarters, dimes, nickels, pennies):
-    total_quarters = quarters * coins['quarter']
-    total_dimes = dimes * coins['dime']
-    total_nickels = nickels * coins['nickel']
-    total_pennies = pennies * coins['penny']
-    return total_quarters + total_dimes + total_nickels + total_pennies
+def list_contains_round(rounds, number):
+    """Check if the list of rounds contains the specified number.
+
+    :param rounds: list - rounds played.
+    :param number: int - round number.
+    :return: bool - was the round played?
+    """
+
+    return number in rounds
 
 
-def amount_needed(coffee_choice):
-    return menu[coffee_choice]['cost']
+def card_average(hand):
+    """Calculate and returns the average card value from the list.
+
+    :param hand: list - cards in hand.
+    :return: float - average value of the cards in the hand.
+    """
+
+    return sum(hand) / len(hand)
 
 
-def collect_coins():
-    print('Please insert coins.')
-    quarters = input('How many quarters?: ')
-    dimes = input('How many dimes?: ')
-    nickels = input('How many nickels?: ')
-    pennies = input('How many pennies?: ')
-    if not (quarters.isdigit() and dimes.isdigit() and nickels.isdigit() and pennies.isdigit()):
-        print("Invalid input. Please enter only numbers.")
-        return collect_coins()
-    return quarters, dimes, nickels, pennies
 
+def approx_average_is_average(hand):
+    """Return if an average is using (first + last index values ) OR ('middle' card) == calculated average.
 
-def coffee_engine():
-    make_coffee = check_resources(user_choice)
-    if make_coffee is None:
-        return
-    else:
-        deplete_resources(make_coffee[0], make_coffee[1], make_coffee[2])
-        coins_collected = collect_coins()
-        coins_total = check_coins(int(coins_collected[0]), int(coins_collected[1]), int(coins_collected[2]), int(coins_collected[3]))
-        if amount_needed(user_choice) > coins_total:
-            print("Not enough money. Coins refunded")
-        else:
-            balance = coins_total - amount_needed(user_choice)
-            if 'money' in resources:
-                resources['money'] += amount_needed(user_choice)
-            else:
-                resources['money'] = amount_needed(user_choice)
-            print(f"\nHere's your Balance: ${balance:.2f}. Enjoy your {user_choice} ☕️\n")
+    :param hand: list - cards in hand.
+    :return: bool - does one of the approximate averages equal the `true average`?
+    """
 
+    middleIndex = int((len(hand) - 1) / 2)
+    return int(card_average(hand)) == middleIndex or int(card_average(hand)) == (hand[0] + hand[-1]) / 2
 
-def generate_report():
-    print("\n*** SUMMARY REPORT ***")
-    if 'money' not in resources:
-        resources['money'] = 0
-    for resource, amount in resources.items():
-        if resource == 'water' or resource == 'milk':
-            print(f"{resource.capitalize()}: {amount}ml")
-        elif resource == 'coffee':
-            print(f"{resource.capitalize()}: {amount}g")
-        else:
-            print(f"{resource.capitalize()}: ${amount}")
-    print('\n')
-
-
-coffee_maker = 'on'
-
-while coffee_maker == 'on':
-    # display prices of the available coffee options
-    for item_name, item_info in menu.items():
-        print(f"{item_name.capitalize()} at ${item_info['cost']:.2f} ")
-
-    # ask user to choose from available options
-    user_choice = input("\nWhat would you like?: ").lower()
-    if user_choice == 'report':
-        generate_report()
-    elif user_choice == 'espresso' or user_choice == 'latte' or user_choice == 'cappuccino':
-        coffee_engine()
-    elif user_choice == 'off':
-        quit()
-    else:
-        print('Invalid Input')
+print(approx_average_is_average([1, 2, 4, 5, 8]))
+print(int(card_average([1, 2, 4, 5, 8])))

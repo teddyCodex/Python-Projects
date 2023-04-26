@@ -1,4 +1,4 @@
-# from art import logo
+from art import logo
 
 def to_base_10(num_list, base):
     '''
@@ -54,17 +54,17 @@ def rebase(input_base, digits, output_base):
         num_from_base10 = from_base_10(num_to_base10, output_base)
         return num_from_base10
 
-# print(rebase(2, [1, 0, 1, 0, 1, 0], 10), 42)
 
-# def main():
-#     print(logo)
-#     num = input('Number to be converted (separate w comma): ')
-#     input_base = int(input('Base to be converted from: '))
-#     output_base = int(input('Base to be converted to: '))
-#     digits = [int(x) for x in num.split(',')]
-
-#     print(rebase(input_base, digits, output_base))
+def main():
+    print(logo)
+    num = input('Number to be converted [list]: ')
+    input_base = int(input('Base to be converted from: '))
+    output_base = int(input('Base to be converted to: '))
+    digits = [int(x) for x in num.split(',')]
 
 
-# if __name__ == "__main__":
-#     main()
+    print(rebase(input_base, digits, output_base))
+
+
+if __name__ == "__main__":
+    main()

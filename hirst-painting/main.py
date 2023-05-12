@@ -9,36 +9,42 @@
 #     new_color = (r, g, b)
 #     rgb_colors.append(new_color)
 
+# print(rgb_colors)
+
 from turtle import Turtle, Screen
 from random import choice
 
 color_list = [
-    (202, 164, 110),
-    (149, 75, 50),
-    (222, 201, 136),
-    (53, 93, 123),
-    (170, 154, 41),
-    (138, 31, 20),
-    (134, 163, 184),
-    (197, 92, 73),
-    (47, 121, 86),
-    (73, 43, 35),
-    (145, 178, 149),
-    (14, 98, 70),
-    (232, 176, 165),
-    (160, 142, 158),
-    (54, 45, 50),
-    (101, 75, 77),
-    (183, 205, 171),
-    (36, 60, 74),
-    (19, 86, 89),
-    (82, 148, 129),
-    (147, 17, 19),
-    (27, 68, 102),
-    (12, 70, 64),
-    (107, 127, 153),
-    (176, 192, 208),
-    (168, 99, 102),
+    (21, 14, 9),
+    (11, 32, 23),
+    (9, 26, 40),
+    (26, 108, 142),
+    (138, 87, 42),
+    (209, 153, 88),
+    (43, 121, 93),
+    (19, 90, 66),
+    (30, 190, 160),
+    (85, 238, 218),
+    (22, 183, 200),
+    (14, 84, 102),
+    (95, 193, 171),
+    (27, 43, 139),
+    (9, 5, 7),
+    (194, 134, 38),
+    (74, 179, 237),
+    (237, 204, 83),
+    (64, 100, 229),
+    (129, 39, 16),
+    (81, 68, 36),
+    (158, 243, 228),
+    (236, 89, 41),
+    (48, 237, 248),
+    (147, 169, 253),
+    (4, 248, 244),
+    (162, 217, 254),
+    (218, 213, 167),
+    (4, 243, 248),
+    (45, 48, 223),
 ]
 
 # initialize turtle and screen
@@ -51,12 +57,13 @@ screen.bgcolor("snow")
 tom.speed(0)
 
 # initialize preferred turtle start position
-tom_x = -380
-tom_y = -350
+tom_x = -360
+tom_y = -330
 
 
 # function to return turtle to start point
 def reset_turtle():
+    tom.hideturtle()
     tom.pu()
     tom.setpos(tom_x, tom_y)
 
@@ -68,7 +75,7 @@ reset_turtle()
 def move_turtle(grid_x, spacing):
     for _ in range(grid_x):
         new_color = choice(color_list)
-        tom.dot(10, new_color)
+        tom.dot(50, new_color)
         tom.pu()
         tom.forward(spacing)
         tom.pd()
@@ -77,13 +84,13 @@ def move_turtle(grid_x, spacing):
 def draw_hirsch(grid_y):
     y_cor = tom_y
     for _ in range(grid_y):
-        move_turtle(51, 15)
+        move_turtle(13, 60)
         reset_turtle()
-        y_cor += 15
+        y_cor += 60
         tom.sety(y_cor)
     tom.hideturtle()
 
 
-draw_hirsch(50)
+draw_hirsch(12)
 
 screen.exitonclick()

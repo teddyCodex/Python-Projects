@@ -33,6 +33,9 @@ class Snake:
         # append this segment to the list of snake segments
         self.snake_segments.append(self.snake)
 
+    def extend_snake(self):
+        self.add_segment(self.snake_segments[-1].position())
+
     def move_snake(self):
         # loop to iterate from the end of the list
         for index in range(len(self.snake_segments) - 1, 0, -1):

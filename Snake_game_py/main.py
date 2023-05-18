@@ -1,6 +1,7 @@
 from turtle import Screen
 from snake import Snake
 from food import Food
+from scoreboard import Scoreboard
 import time
 
 EASY = 0.5
@@ -16,6 +17,8 @@ screen.tracer(0)  # screen animation control. 0 =off, 1 = on
 
 snake = Snake(3)  # initialize a new snake instance passing length as an argument
 food = Food()
+scoreboard = Scoreboard()
+scoreboard.display_score()
 
 screen.listen()  # listen for input
 # various input options - these represent keyboard arrow keys
@@ -42,7 +45,19 @@ while game_active:
 
     # detect collision with food
     if snake.snake_segments[0].distance(food) < 15:
+        scoreboard.update_score()
+        scoreboard.display_score()
         food.new_food()
+
+    # detect collision with wall
+    if (
+        snake.snake_segments[0].xcor() > 280
+        or snake.snake_segments[0].xcor() < -280
+        or snake.snake_segments[0].ycor() > 280
+        or snake.snake_segments[0].ycor() < -280
+    ):
+        scoreboard.game_over()
+        game_active = False  # end the game
 
 
 screen.exitonclick()  # exit the screen on click

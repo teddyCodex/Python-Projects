@@ -1,36 +1,37 @@
 from turtle import Turtle
 
-MOVE_DISTANCE = 20
 EAST = 0
 NORTH = 90
 WEST = 180
 SOUTH = 270
 
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
+
 
 class Snake:
-    def __init__(self, snake_length) -> None:
+    def __init__(self) -> None:
         # turtle starting position
         self.x_cor = 0
         self.y_cor = 0
         self.snake_segments = []
-        self.create_snake(snake_length)
+        self.create_snake()
 
-    def create_snake(self, length):
-        for i in range(length):
-            # for this iteration, initialize new snake segment
-            self.snake = Turtle("square")
-            # change this snake segment instance color to white
-            self.snake.color("snow")
-            # raise pen to prevent drawing
-            self.snake.pu()
-            # adjust snake size
-            self.snake.shapesize(stretch_len=0.9, stretch_wid=0.9)
-            # move this snake segment to the coordinates defined at the variables
-            self.snake.goto(x=self.x_cor, y=self.y_cor)
-            # adjust the x_coordinate to move the next snake segment to desired position
-            self.x_cor -= MOVE_DISTANCE
-            # append this segment to the list of snake segments
-            self.snake_segments.append(self.snake)
+    def create_snake(self):
+        for position in STARTING_POSITIONS:
+            self.add_segment(position=position)
+
+    def add_segment(self, position):
+        self.snake = Turtle("square")
+        # change this snake segment instance color to white
+        self.snake.color("snow")
+        # raise pen to prevent drawing
+        self.snake.pu()
+        # adjust snake size
+        self.snake.shapesize(stretch_len=0.9, stretch_wid=0.9)
+        # move this snake segment to the coordinates defined at the variables
+        self.snake.goto(position)
+        # append this segment to the list of snake segments
+        self.snake_segments.append(self.snake)
 
     def move_snake(self):
         # loop to iterate from the end of the list
@@ -42,7 +43,7 @@ class Snake:
             # move this segment to the new coordinates
             self.snake_segments[index].goto(new_x, new_y)
         # after loop has run, move the first segment forward
-        self.snake_segments[0].fd(MOVE_DISTANCE)
+        self.snake_segments[0].fd(20)
 
     def up(self):
         """This function checks if the snake is facing north or south.

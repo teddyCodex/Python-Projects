@@ -15,7 +15,7 @@ screen.title("Snake Game")  # add title name to screen
 difficulty = screen.textinput("Choose Difficulty", "        Easy-Medium-Hard: ").lower()
 screen.tracer(0)  # screen animation control. 0 =off, 1 = on
 
-snake = Snake(3)  # initialize a new snake instance passing length as an argument
+snake = Snake()  # initialize a new snake instance passing length as an argument
 food = Food()
 scoreboard = Scoreboard()
 scoreboard.display_score()

@@ -1,5 +1,6 @@
 from turtle import Screen
 from snake import Snake
+from food import Food
 import time
 
 EASY = 0.5
@@ -13,8 +14,8 @@ screen.title("Snake Game")  # add title name to screen
 difficulty = screen.textinput("Choose Difficulty", "        Easy-Medium-Hard: ").lower()
 screen.tracer(0)  # screen animation control. 0 =off, 1 = on
 
-snake = Snake(3)  # initialize a new snake instance
-
+snake = Snake(3)  # initialize a new snake instance passing length as an argument
+food = Food()
 
 screen.listen()  # listen for input
 # various input options - these represent keyboard arrow keys
@@ -38,6 +39,10 @@ while game_active:
         time.sleep(MEDIUM)
     # move the snake
     snake.move_snake()
+
+    # detect collision with food
+    if snake.snake_segments[0].distance(food) < 15:
+        food.new_food()
 
 
 screen.exitonclick()  # exit the screen on click

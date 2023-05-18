@@ -20,15 +20,17 @@ class Snake:
             # for this iteration, initialize new snake segment
             self.snake = Turtle("square")
             # change this snake segment instance color to white
-            self.snake.color("white")
+            self.snake.color("snow")
             # raise pen to prevent drawing
             self.snake.pu()
+            # adjust snake size
+            self.snake.shapesize(stretch_len=0.9, stretch_wid=0.9)
             # move this snake segment to the coordinates defined at the variables
             self.snake.goto(x=self.x_cor, y=self.y_cor)
-            # append this segment to the list of snake segments
-            self.snake_segments.append(self.snake)
             # adjust the x_coordinate to move the next snake segment to desired position
             self.x_cor -= MOVE_DISTANCE
+            # append this segment to the list of snake segments
+            self.snake_segments.append(self.snake)
 
     def move_snake(self):
         # loop to iterate from the end of the list

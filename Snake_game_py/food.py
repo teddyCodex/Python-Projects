@@ -10,7 +10,7 @@ class Food(Turtle):
         self.shape("circle")  # change shape of food
         self.pu()  # penup to prevent drawing
         self.shapesize(stretch_len=0.5, stretch_wid=0.5)  # adjust size by 40%
-        self.color("snow")  # change food color
+        self.color("ForestGreen")  # change food color
         self.speed(0)
         self.new_food()
 

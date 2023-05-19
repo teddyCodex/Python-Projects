@@ -15,6 +15,7 @@ class Snake:
         self.y_cor = 0
         self.snake_segments = []
         self.create_snake()
+        self.snake_head = self.snake_segments[0]
 
     def create_snake(self):
         for position in STARTING_POSITIONS:
@@ -46,7 +47,7 @@ class Snake:
             # move this segment to the new coordinates
             self.snake_segments[index].goto(new_x, new_y)
         # after loop has run, move the first segment forward
-        self.snake_segments[0].fd(20)
+        self.snake_head.fd(20)
 
     def up(self):
         """This function checks if the snake is facing north or south.

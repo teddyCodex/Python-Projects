@@ -4,14 +4,14 @@ import time
 
 GREETING = "Welcome!"
 GREETING_FONT = ("Lato", 24, "bold")
-OPERATIONS_TEXT = "Select an operation\n\n1  to  Add a contact\n2  to  Delete a contact\n3  to  Update a contact\n4  to  Search contacts\n5  to  View all\n6  to  Exit"
+OPERATIONS_TEXT = "Select an operation\n\n1  to  Add a contact\n2  to  Delete a contact\n3  to  Update a contact\n4  to  Search contacts\n5  to  View all contacts\n6  to  Exit"
 OPERATIONS_FONT = ("Lato", 18, "normal")
 
 
 class UserInterface:
     def __init__(self):
         self.screen = Screen()
-        self.screen.setup(width=800, height=600)
+        self.screen.setup(width=800, height=800)
         self.screen.title("Contact Manager")
         self.screen.bgcolor("#1e1e1e")
         self.turtle = Turtle()
@@ -32,7 +32,7 @@ class UserInterface:
         title_prompt = "Delete a contact"
         self.turtle.clear()
         contact_info = self.retrieve_contact_handler(title_prompt=title_prompt)
-        if type(self.reformat_contact_info(contact_info)) == str:
+        if self.reformat_contact_info(contact_info) != None:
             if (
                 self.screen.textinput(
                     "Confirm Delete Action",
@@ -53,7 +53,7 @@ class UserInterface:
         title_prompt = "Update a contact"
         self.turtle.clear()
         contact_info = self.retrieve_contact_handler(title_prompt=title_prompt)
-        if type(self.reformat_contact_info(contact_info)) == str:
+        if self.reformat_contact_info(contact_info) != None:
             if (
                 self.screen.textinput(
                     title_prompt,
@@ -79,6 +79,35 @@ class UserInterface:
             else:
                 self.turtle.clear()
                 self.operations()
+
+    def search_contacts(self):
+        title_prompt = "Search Contacts"
+        self.turtle.clear()
+        contact_info = self.retrieve_contact_handler(title_prompt=title_prompt)
+        formatted_contact_info = self.reformat_contact_info(contact_info)
+        if formatted_contact_info != None:
+            self.turtle.clear()
+            self.turtle.write(
+                f"Contact Found\n\n{formatted_contact_info}\n\nPress 'Enter' to go home",
+                align="center",
+                font=OPERATIONS_FONT,
+            )
+        self.screen.listen()
+        self.screen.onkey(self.operations, "Return")
+
+    # def view_all_contacts_handler(self):
+    #     self.turtle.clear()
+    #     self.contact_book.view_all()
+
+    def exit_program(self):
+        self.turtle.clear()
+        if self.screen.textinput("Exit?", "Exit Contact book? (Y/N)").lower() == "y":
+            self.turtle.write("Exiting Program", align="center", font=OPERATIONS_FONT)
+            time.sleep(1)
+            exit()
+        else:
+            self.turtle.clear()
+            self.operations()
 
     def retrieve_contact_handler(self, title_prompt):
         first_name = self.screen.textinput(title_prompt, "Contact first name")
@@ -106,17 +135,18 @@ class UserInterface:
                 details += f"{i}\n"
             return details
 
-    def exit_screen(self):
-        self.screen.exitonclick()
-
     def splash_screen(self):
         self.turtle.write(f"{GREETING}", align="center", font=GREETING_FONT)
         time.sleep(2)
         self.turtle.clear()
 
     def operations(self):
+        self.turtle.clear()
         self.screen.listen()
         self.screen.onkey(self.add_contact_handler, "1")
         self.screen.onkey(self.delete_contact_handler, "2")
         self.screen.onkey(self.update_contact_handler, "3")
+        self.screen.onkey(self.search_contacts, "4")
+        # self.screen.onkey(self.view_all_contacts_handler, "5")
+        self.screen.onkey(self.exit_program, "6")
         self.turtle.write(OPERATIONS_TEXT, align="center", font=OPERATIONS_FONT)

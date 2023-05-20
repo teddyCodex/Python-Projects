@@ -77,6 +77,13 @@ class Contact_book(Turtle):
         self.clear()
         self.user_interface.operations()
 
+    # def view_all(self):
+    #     list_of_contacts = []
+    #     for contact in self.contacts:
+    #         list_of_contacts.append(self.format_contact_details(self.contacts[contact]))
+    #     for contact_tuple in list_of_contacts:
+    #         self.write(f"{contact_tuple}\n", align="center", font=OPERATIONS_FONT)
+
     def format_contact_details(self, dictionary):
         if dictionary is not None:
             return (
@@ -86,62 +93,3 @@ class Contact_book(Turtle):
             )
         else:
             return "Contact not found."
-
-
-# def print_contact_details(name):
-#     contact = contacts[name]
-#     print("\nname : {}".format(contact["name"]))
-#     print("address : {}".format(contact["address"]))
-#     print("tel : {}".format(contact["tel"]))
-
-
-#     # _______________________________________________________
-#     # Function to update a contact
-#     def update_contact():
-#         def update(name):
-#             global contacts
-#             print_contact_details(name)
-#             new_name = input("Enter new name: ")
-#             new_address = input("Enter new address: ")
-#             new_tel = input("Enter new tel: ")
-#             contacts[name] = {
-#                 "name": new_name,
-#                 "address": new_address,
-#                 "tel": new_tel,
-#             }
-#             print("\nContact updated successfully")
-
-#         while True:
-#             print("\nUPDATE A CONTACT")
-#             fname = input("First Name: ").lower()
-#             lname = input("Last Name: ").lower()
-#             full_name = f"{fname} {lname}".title()
-#             update(full_name)
-
-#             if input("Update another contact? ('y' or 'n'): ").lower() == "n":
-#                 break
-
-#     # _______________________________________________________
-#     # Function to view a contact
-#     def view_contact():
-#         while True:
-#             print("\nVIEW A CONTACT")
-#             fname = input("First Name: ").lower()
-#             lname = input("Last Name: ").lower()
-#             full_name = f"{fname} {lname}".title()
-#             print_contact_details(full_name)
-
-#             if input("\nView another contact? ('y' or 'n'): ").lower() == "n":
-#                 break
-
-#     # _______________________________________________________
-#     # Function to view all contacts
-#     def view_all():
-#         print("\nVIEWING ALL CONTACT\n")
-#         for name in contacts:
-#             print_contact_details(name)
-
-#     # _______________________________________________________
-#     # Function to exit the program
-#     def exit_program():
-#         exit()

@@ -1,6 +1,7 @@
 from turtle import Turtle
 import time
 
+# contact book constants
 OPERATIONS_FONT = ("Lato", 18, "normal")
 
 
@@ -14,22 +15,33 @@ class Contact_book(Turtle):
 
     def add_contact(self, first_name, last_name, address, phone_number):
         self.clear()
-        full_name = f"{first_name} {last_name}".title()
-        self.contacts[full_name] = {
-            "name": full_name,
-            "address": address,
-            "phone_number": phone_number,
-        }
-        self.write(
-            "Contact Added!",
-            align="center",
-            font=OPERATIONS_FONT,
-        )
-        time.sleep(1)
-        self.clear()
-        self.user_interface.operations()
+        if first_name == "" and last_name == "":
+            self.pu()
+            self.write(
+                "Contact names not provided",
+                align="center",
+                font=("Lato", 16, "normal"),
+            )
+            time.sleep(1.5)
+            self.clear()
+            self.user_interface.operations()
+        else:
+            full_name = f"{first_name} {last_name}".title()
+            self.contacts[full_name] = {
+                "name": full_name,
+                "address": address,
+                "phone_number": phone_number,
+            }
+            self.write(
+                "Contact Added!",
+                align="center",
+                font=OPERATIONS_FONT,
+            )
+            time.sleep(1)
+            self.clear()
+            self.user_interface.operations()
 
-    def retrieve_contact(self, first_name, last_name):
+    def search_contacts(self, first_name, last_name):
         self.clear()
         full_name = f"{first_name} {last_name}".title()
         if full_name in self.contacts:
@@ -76,13 +88,6 @@ class Contact_book(Turtle):
         time.sleep(1.5)
         self.clear()
         self.user_interface.operations()
-
-    # def view_all(self):
-    #     list_of_contacts = []
-    #     for contact in self.contacts:
-    #         list_of_contacts.append(self.format_contact_details(self.contacts[contact]))
-    #     for contact_tuple in list_of_contacts:
-    #         self.write(f"{contact_tuple}\n", align="center", font=OPERATIONS_FONT)
 
     def format_contact_details(self, dictionary):
         if dictionary is not None:

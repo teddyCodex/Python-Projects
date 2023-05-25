@@ -17,6 +17,10 @@ class Player(Turtle):
         self.shape("turtle")
         self.penup()
         self.setheading(90)  # change heading to face north
+        self.start_position()
+
+    def start_position(self):
+        """Resets the turtle to the starting position"""
         self.goto(STARTING_POSITION)
 
     def move_up(self):

@@ -9,6 +9,7 @@ MOVE_INCREMENT = 10
 class CarManager:
     def __init__(self) -> None:
         self.cars = []
+        self.car_speed = STARTING_MOVE_DISTANCE
 
     def create_car(self):
         """This function generates a random number when called.
@@ -27,4 +28,9 @@ class CarManager:
     def move_cars(self):
         """This function moves all the cars in the list of cars"""
         for car in self.cars:
-            car.back(STARTING_MOVE_DISTANCE)
+            car.back(self.car_speed)
+
+    def increase_speed(self):
+        """This function increases the car speed by MOVE_INCREMENT"""
+        self.car_speed += MOVE_INCREMENT
+        print(self.car_speed)

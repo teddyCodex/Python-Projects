@@ -10,7 +10,7 @@ screen.tracer(0)
 
 player = Player()
 car_manager = CarManager()
-car_manager.create_car()
+
 
 screen.listen()
 screen.onkey(player.move_up, "Up")  # event listener for player movement
@@ -20,10 +20,14 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
 
+    car_manager.create_car()
+    car_manager.move_cars()
 
-# TODO: Create cars that are 20px high by 40px wide that are randomly generated along the y-axis and move to the left edge of the screen.
-# No cars should be generated in the top and bottom 50px of the screen (think of it as a safe zone for our little turtle).
-# Hint: generate a new car only every 6th time the game loop runs.
+    # Detect player collision with car
+    for car in car_manager.cars:
+        if player.distance(car) < 25:
+            game_is_on = False
+
 
 # TODO: Detect when the turtle player collides with a car and stop the game if this happens.
 

@@ -33,4 +33,3 @@ class CarManager:
     def increase_speed(self):
         """This function increases the car speed by MOVE_INCREMENT"""
         self.car_speed += MOVE_INCREMENT
-        print(self.car_speed)

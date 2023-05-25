@@ -9,6 +9,8 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 player = Player()
+car_manager = CarManager()
+car_manager.create_car()
 
 screen.listen()
 screen.onkey(player.move_up, "Up")  # event listener for player movement

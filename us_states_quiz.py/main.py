@@ -27,20 +27,21 @@ states_list = states_df.state.to_list()
 def check_answer(user_input):
     if user_input in states_list:
         state = states_df[states_df.state == user_input]
-        x_cor = state.x.iloc[0]
-        y_cor = state.y.iloc[0]
+        x_cor = state.x.item()
+        y_cor = state.y.item()
+        # alternative way to get the value
+        # x_cor = state.x.iloc[0]
+        # y_cor = state.y.iloc[0]
         turtle.goto(x=x_cor, y=y_cor)
         turtle.color("red")
-        turtle.write(user_input, align="center", font=("Lato", 12, "normal"))
+        turtle.write(user_input, align="center", font=("Lato", 10, "normal"))
         scoreboard.update_score()
         states_list.remove(user_input)
     elif user_input == "Quit":
         quit()
 
 
-game_is_on = True
-
-while game_is_on:
+while len(states_list) > 0:
     user_input = screen.textinput(title="Guess a state", prompt="Guess a state").title()
     check_answer(user_input=user_input)
 

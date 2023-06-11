@@ -1,4 +1,5 @@
 import turtle
+from scoreboard import Scoreboard
 import pandas as pd
 
 # screen set-up
@@ -11,18 +12,8 @@ image = "blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
 
-# score tracker
-correct_guesses = 0
-pen = turtle.Turtle()
-pen.pu()
-pen.hideturtle()
-pen.color("#434654")
-pen.goto(200, 265)
-pen.write(
-    f"{correct_guesses} of 50 States Guessed",
-    align="center",
-    font=("Futura", 22, "bold"),
-)
+# initialize scoreboard to track user score
+scoreboard = Scoreboard()
 
 screen.update()
 
@@ -38,13 +29,19 @@ def check_answer(user_input):
         state = states_df[states_df.state == user_input]
         x_cor = state.x.iloc[0]
         y_cor = state.y.iloc[0]
-        print(x_cor, y_cor)
+        turtle.goto(x=x_cor, y=y_cor)
+        turtle.color("red")
+        turtle.write(user_input, align="center", font=("Lato", 12, "normal"))
+        scoreboard.update_score()
+        states_list.remove(user_input)
+    elif user_input == "Quit":
+        quit()
 
 
 game_is_on = True
 
 while game_is_on:
     user_input = screen.textinput(title="Guess a state", prompt="Guess a state").title()
-    check_answer(user_input)
+    check_answer(user_input=user_input)
 
 turtle.mainloop()

@@ -29,20 +29,20 @@ def check_answer(user_input):
         state = states_df[states_df.state == user_input]
         x_cor = state.x.item()
         y_cor = state.y.item()
-        # alternative way to get the value
-        # x_cor = state.x.iloc[0]
-        # y_cor = state.y.iloc[0]
+        turtle.penup()
         turtle.goto(x=x_cor, y=y_cor)
         turtle.color("red")
         turtle.write(user_input, align="center", font=("Lato", 10, "normal"))
         scoreboard.update_score()
         states_list.remove(user_input)
-    elif user_input == "Quit":
-        quit()
 
 
 while len(states_list) > 0:
     user_input = screen.textinput(title="Guess a state", prompt="Guess a state").title()
-    check_answer(user_input=user_input)
+    if user_input == "Quit":
+        break
+    else:
+        check_answer(user_input=user_input)
 
-turtle.mainloop()
+new_df = pd.DataFrame(states_list)
+new_df.to_csv("states_to_learn.csv")

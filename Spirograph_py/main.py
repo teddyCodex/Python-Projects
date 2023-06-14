@@ -1,5 +1,5 @@
-from turtle import Turtle, Screen, forward, left, right, back
-from random import choice, randint
+from turtle import Turtle, Screen
+from random import randint
 
 screen = Screen()
 screen.colormode(255)

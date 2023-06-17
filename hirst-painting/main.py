@@ -81,7 +81,7 @@ def move_turtle(grid_x, spacing):
         tom.pd()
 
 
-def draw_hirsch(grid_y):
+def draw_hirst(grid_y):
     y_cor = tom_y
     for _ in range(grid_y):
         move_turtle(13, 60)
@@ -91,6 +91,6 @@ def draw_hirsch(grid_y):
     tom.hideturtle()
 
 
-draw_hirsch(12)
+draw_hirst(12)
 
 screen.exitonclick()

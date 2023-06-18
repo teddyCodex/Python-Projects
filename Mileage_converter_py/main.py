@@ -1,13 +1,24 @@
 # miles to km = multiply by 1.609
 
-# import the library that we will use for our GUI (Graphical User Interface)
 import tkinter as tk
+
+KM = 1.609
 
 # window set-up
 window = tk.Tk()
 window.title("Mileage Converter")
 window.minsize(width=300, height=200)
 window.config(padx=30, pady=40)
+
+
+# function to calculate mileage
+def calculate_mileage():
+    if mile_input.get() == "":
+        pass
+    else:
+        user_input = int(mile_input.get())
+        to_km = round(user_input * KM, 3)
+        result_label.config(text=to_km)
 
 
 # labels & input box
@@ -27,7 +38,7 @@ km_label.grid(column=2, row=1)
 result_label = tk.Label()
 result_label.grid(column=1, row=1)
 
-calculate = tk.Button(text="Calculate")
+calculate = tk.Button(text="Calculate", command=calculate_mileage, padx=2, pady=2)
 calculate.grid(column=1, row=2)
 
 window.mainloop()

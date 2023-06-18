@@ -5,8 +5,8 @@ import tkinter as tk
 
 # window set-up
 window = tk.Tk()
-window.title('Mileage Converter')
-window.minsize(width=500, height=200)
+window.title("Mileage Converter")
+window.minsize(width=300, height=200)
 
 
 # 4 labels

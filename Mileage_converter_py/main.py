@@ -10,7 +10,7 @@ window.config(padx=30, pady=40)
 
 
 # function to calculate mileage
-def calculate_mileage():
+def calculate():
     if mile_input.get() == "":
         pass
     else:
@@ -36,7 +36,7 @@ km_label.grid(column=2, row=1)
 result_label = tk.Label()
 result_label.grid(column=1, row=1)
 
-calculate = tk.Button(text="Calculate", command=calculate_mileage, padx=2, pady=2)
-calculate.grid(column=1, row=2)
+calculate_button = tk.Button(text="Calculate", command=calculate, padx=2, pady=2)
+calculate_button.grid(column=1, row=2)
 
 window.mainloop()

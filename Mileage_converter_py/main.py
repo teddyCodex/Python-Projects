@@ -14,9 +14,9 @@ def calculate_mileage():
     if mile_input.get() == "":
         pass
     else:
-        user_input = int(mile_input.get())
-        to_km = round(user_input * KM, 3)
-        result_label.config(text=to_km)
+        user_input = int(mile_input.get())  # save user input to a variable
+        to_km = round(user_input * KM, 3)  # convert to Km
+        result_label.config(text=to_km)  # display as the result label
 
 
 # labels & input box

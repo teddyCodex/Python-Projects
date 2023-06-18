@@ -1,5 +1,3 @@
-# miles to km = multiply by 1.609
-
 import tkinter as tk
 
 KM = 1.609

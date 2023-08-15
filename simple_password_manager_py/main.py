@@ -70,8 +70,6 @@ def generate_password():
     nr_symbols = random.randint(2, 4)
     nr_numbers = random.randint(2, 4)
 
-    # password_list = []
-
     password_list = (
         [random.choice(letters) for char in range(nr_letters)]
         + [random.choice(symbols) for char in range(nr_symbols)]

@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import random
 import pyperclip
+import json
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -86,30 +87,69 @@ def generate_password():
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
+
+def save_new_record(record) -> None:
+    """
+    Takes a dictionary as input and adds it to a designated json file
+    """
+    with open("data.json", "w") as data_file:
+        json.dump(record, data_file, indent=4)
+
+
 def add_record():
-    website = website_entry.get()
+    website = website_entry.get().title()
     email = email_entry.get()
     password = password_entry.get()
+    new_record = {website: {"email": email, "password": password}}
 
-    if website == "" or email == "" or password == "":
+    if len(website) < 1 or len(password) < 1:
         messagebox.showerror(
             message="Please fill all fields!", parent=mainframe, icon="error"
         )
     else:
-        confirmation = messagebox.askokcancel(
-            message=f"Save this record?:\n\nWebsite: {website}\nEmail: {email}\nPassword: {password}",
-            icon="question",
-            title="Add Record",
-            parent=mainframe,
-        )
+        try:
+            with open("data.json", "r") as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+            save_new_record(record=new_record)
+        except json.decoder.JSONDecodeError:
+            save_new_record(record=new_record)
+        else:
+            data.update(new_record)
+            save_new_record(record=data)
+        finally:
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
+            website_entry.focus()
 
-        if confirmation:
-            with open("data.txt", "a") as data_file:
-                data_file.write(f"{website} || {email} || {password}\n")
 
-        website_entry.delete(0, END)
-        password_entry.delete(0, END)
-        website_entry.focus()
+# ---------------------------- SEARCH RECORDS ------------------------------- #
+
+
+def search():
+    website = website_entry.get().title()
+
+    if len(website) < 1:
+        messagebox.showwarning(parent=mainframe, message="No Website Entered!")
+    else:
+        try:
+            with open("data.json", "r") as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+            messagebox.showinfo(parent=mainframe, message="Error!\nNo Data File Found.")
+        else:
+            if website in data:
+                email = data[website]["email"]
+                password = data[website]["password"]
+                messagebox.showinfo(
+                    parent=mainframe,
+                    message=f"{website}\nEmail: {email}\nPassword: {password}",
+                )
+            else:
+                messagebox.showinfo(
+                    parent=mainframe, message="Website Not Found in the Database."
+                )
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -149,8 +189,8 @@ password_label = ttk.Label(mainframe, text="Password:")
 password_label.grid(row=3, column=0)
 
 # Entries
-website_entry = ttk.Entry(mainframe, width=40)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry = ttk.Entry(mainframe, width=22)
+website_entry.grid(row=1, column=1, columnspan=1)
 website_entry.focus()
 email_entry = ttk.Entry(mainframe, width=40)
 email_entry.grid(row=2, column=1, columnspan=2)
@@ -159,10 +199,14 @@ password_entry = ttk.Entry(mainframe, width=22)
 password_entry.grid(row=3, column=1)
 
 # Buttons
+search_btn = ttk.Button(mainframe, text="Search", width=13, command=search)
+search_btn.grid(row=1, column=2)
+
 password_btn = ttk.Button(
     mainframe, text="Generate Password", command=generate_password
 )
 password_btn.grid(row=3, column=2)
+
 add_btn = ttk.Button(mainframe, text="Add Record", width=37, command=add_record)
 add_btn.grid(row=4, column=1, columnspan=2)
 

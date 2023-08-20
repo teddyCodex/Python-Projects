@@ -8,7 +8,7 @@ BACKGROUND_COLOR = "#B1DDC6"
 csv_file = pd.read_csv("data/de-en.csv")
 data = pd.DataFrame.to_dict(csv_file, orient="records")
 
-languages = [x for x in data[0].keys()]
+languages = [x.lower() for x in data[0].keys()]
 
 LANGUAGE_TO_LEARN = languages[0]
 BASE_LANGUAGE = languages[1]

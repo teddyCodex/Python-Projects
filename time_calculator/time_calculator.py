@@ -48,6 +48,10 @@ def add_time(start, duration, day=None):
         return start_in_mins, duration_in_mins
 
     def format_output(current_time, days_passed=0, day=None):
+        """
+        Accepts one required argument and two optional
+        Formats the output accordingly depending on provided arguments
+        """
         if day:
             day = day.title()
         if days_passed == 1 and day:
@@ -87,15 +91,19 @@ def add_time(start, duration, day=None):
     current_mins = total_minutes - (current_hour * MINS_IN_HOUR)
     days_passed = total_minutes // MINS_IN_DAY
 
+    # make sure current hour is in 24hr time
     while current_hour > HOURS_IN_DAY:
         current_hour -= HOURS_IN_DAY
 
+    # check if current hour is midnight and convert to 12hr time
     if current_hour == HOURS_IN_DAY:
         current_hour = HALF_DAY
 
+    # add a zero if minutes is a single digit
     if current_mins < 10:
         current_mins = f"0{current_mins}"
 
+    # format time string without day and days passed
     if days_passed == 0 and current_hour == HALF_DAY:
         current_time = f"{current_hour}:{current_mins} PM"
     elif current_hour <= HALF_DAY:
@@ -106,6 +114,7 @@ def add_time(start, duration, day=None):
 
     current_day = None
 
+    # if day is provided, format accordingly
     if day:
         day_index = days_in_week.index(day.lower())
         current_day_index = day_index + days_passed

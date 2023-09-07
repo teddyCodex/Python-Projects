@@ -1,8 +1,6 @@
 import copy
 import random
 
-# Consider using the modules imported above.
-
 
 class Hat:
     def __init__(self, **kwargs) -> None:
@@ -25,43 +23,21 @@ class Hat:
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    success_count = int()
-    for i in range(num_experiments):
-        new_hat = copy.copy(hat)
-        list_of_balls = new_hat.draw(num_balls_drawn)
-        print(list_of_balls)
-        check = []
-        for ball in expected_balls:
-            print(ball)
-            ball_count = list_of_balls.count(ball)
-            if ball_count >= expected_balls.get(ball):
-                check.append(True)
-        print(check)
-        if len(check) >= len(expected_balls):
+    success_count = 0
+
+    for _ in range(num_experiments):
+        # Create a deep copy of the hat for each experiment
+        new_hat = copy.deepcopy(hat)
+
+        balls_drawn = new_hat.draw(num_balls_drawn)
+        found_all = True
+        for key in expected_balls:
+            if balls_drawn.count(key) < expected_balls[key]:
+                found_all = False
+                break
+
+        if found_all:
             success_count += 1
 
-    # print(success_count)
-
-    return success_count / num_experiments
-
-
-hat = Hat(blue=3, red=2, green=6)
-probability = experiment(
-    hat=hat,
-    expected_balls={"blue": 2, "green": 1},
-    num_balls_drawn=5,
-    num_experiments=1,
-)
-print(probability)
-
-expected = 0.272
-
-# hat = Hat(yellow=5, red=1, green=3, blue=9, test=1)
-# probability = experiment(
-#     hat=hat,
-#     expected_balls={"yellow": 2, "blue": 3, "test": 1},
-#     num_balls_drawn=20,
-#     num_experiments=100,
-# )
-# print(probability)
-# expected = 1.0
+    probability = success_count / num_experiments
+    return probability

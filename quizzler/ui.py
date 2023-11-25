@@ -3,7 +3,7 @@ from quiz_brain import QuizBrain
 
 THEME_COLOR = "#375362"
 
-text = "Amazon acquired Twitch in August 2014 for 970 million dollars"
+text = str()
 
 
 class QuizUI:
@@ -32,12 +32,21 @@ class QuizUI:
 
         true_img = PhotoImage(file="images/true.png")
         false_img = PhotoImage(file="images/false.png")
+
         self.true_btn = Button(
-            master=self.window, image=true_img, highlightthickness=0, bd=0
+            master=self.window,
+            image=true_img,
+            highlightthickness=0,
+            bd=0,
+            command=self.true_button,
         )
         self.true_btn.grid(row=3, column=0, pady=50)
         self.false_btn = Button(
-            master=self.window, image=false_img, highlightthickness=0, bd=0
+            master=self.window,
+            image=false_img,
+            highlightthickness=0,
+            bd=0,
+            command=self.false_button,
         )
         self.false_btn.grid(row=3, column=1, pady=50)
 
@@ -48,3 +57,9 @@ class QuizUI:
     def get_next_question(self):
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.question_text, text=q_text)
+
+    def true_button(self):
+        self.quiz.check_answer("True")
+
+    def false_button(self):
+        self.quiz.check_answer("False")
